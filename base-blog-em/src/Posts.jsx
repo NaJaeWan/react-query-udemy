@@ -1,5 +1,6 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useQuery, useQueryClient, useMutation } from 'react-query';
+import axios from 'axios';
 
 import { PostDetail } from './PostDetail';
 const maxPostPage = 10;
@@ -10,12 +11,31 @@ async function fetchPosts(pageNum) {
 	);
 	return response.json();
 }
-
+async function updateItem(itemId, name, price) {
+	const response = await axios.post(`http://localhost:3001/data/${itemId}`, {
+		id: itemId,
+		name: name,
+		price: price,
+	});
+	return response.data;
+}
 export function Posts() {
 	const [currentPage, setCurrentPage] = useState(0);
 	const [selectedPost, setSelectedPost] = useState(null);
 
+	const [itemId, setItemId] = useState(0);
+	const [name, setName] = useState('');
+	const [price, setPrice] = useState(0);
+
+	const idRef = useRef();
+	const nameRef = useRef();
+	const priceRef = useRef();
+
 	const queryClient = useQueryClient();
+	const updateItemMutation = useMutation((itemId) =>
+		updateItem(itemId, name, price)
+	);
+
 	// replace with useQuery
 	const { data, isError, error, isLoading, isFetching } = useQuery(
 		['posts', currentPage],
@@ -25,6 +45,11 @@ export function Posts() {
 			keepPreviousData: true, // 이전 데이터를 유지하게 된다.
 		}
 	);
+
+	const onChange = (e) => {
+		console.log(e);
+		setItemId(e.target.value);
+	};
 
 	useEffect(() => {
 		if (currentPage < maxPostPage) {
@@ -49,6 +74,32 @@ export function Posts() {
 
 	return (
 		<>
+			<div>
+				<ul style={{ listStyle: 'none' }}>
+					<li>
+						<label>id : </label>
+						<input onChange={onChange} ref={idRef} type="number"></input>
+					</li>
+					<li>
+						<label>name : </label>
+						<input ref={nameRef} type="text"></input>
+					</li>
+					<li>
+						<label>price : </label>
+						<input ref={priceRef} type="number"></input>
+					</li>
+				</ul>
+			</div>
+			{updateItemMutation.isError && (
+				<p style={{ color: 'red' }}>Error updating the post</p>
+			)}
+			{updateItemMutation.isLoading && (
+				<p style={{ color: 'purple' }}>updating the post</p>
+			)}
+			{updateItemMutation.isSuccess && (
+				<p style={{ color: 'green' }}>Post has been updated</p>
+			)}
+
 			<ul>
 				{data.map((post) => (
 					<li
