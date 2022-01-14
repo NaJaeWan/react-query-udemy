@@ -21,7 +21,7 @@ export function Posts() {
 		['posts', currentPage],
 		() => fetchPosts(currentPage),
 		{
-			staleTime: 2000,
+			// staleTime: 2000,
 			keepPreviousData: true, // 이전 데이터를 유지하게 된다.
 		}
 	);
