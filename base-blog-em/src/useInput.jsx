@@ -8,4 +8,8 @@ export default function useInput() {
 	};
 
 	return { value: value, onChange: onChange };
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> main
