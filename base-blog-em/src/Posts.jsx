@@ -17,13 +17,13 @@ export function Posts() {
 
 	const queryClient = useQueryClient();
 
-	// replace with useQuery
 	const { data, isError, error, isLoading, isFetching } = useQuery(
 		['posts', currentPage],
 		() => fetchPosts(currentPage),
 		{
-			staleTime: 5000,
-			// keepPreviousData: true, // 이전 데이터를 유지하게 된다.
+			staleTime: 10000,
+			// cacheTime: 2000,
+			keepPreviousData: true,
 		}
 	);
 
@@ -32,6 +32,12 @@ export function Posts() {
 			const nextPage = currentPage + 1;
 			queryClient.prefetchQuery(['posts', nextPage], () =>
 				fetchPosts(nextPage)
+			);
+		}
+		if (1 < currentPage) {
+			const priviousPage = currentPage - 1;
+			queryClient.prefetchQuery(['posts', priviousPage], () =>
+				fetchPosts(priviousPage)
 			);
 		}
 	}, [currentPage, queryClient]);
