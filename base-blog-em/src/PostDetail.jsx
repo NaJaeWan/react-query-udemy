@@ -19,9 +19,9 @@ export function PostDetail({ post }) {
     updatePost(userInfo);
   });
 
-  // useEffect(() => {
-  //   refetch();
-  // }, []);
+  useEffect(() => {
+    refetch();
+  }, []);
 
   if (isLoading) {
     return <h3>loading...</h3>;
