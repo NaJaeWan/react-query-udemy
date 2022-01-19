@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { useMutation, useQuery, useQueryClient } from 'react-query';
+import { useMutation, useQuery } from 'react-query';
 import useInput from './useInput';
 import { fetchComments, updatePost, deletePost } from './api.jsx';
 
@@ -14,32 +14,14 @@ export function PostDetail({ post }) {
   const userName = useInput();
   const userComment = useInput();
 
-  // const queryClient = useQueryClient();
-
   const deleteMutation = useMutation((commentInfo) => deletePost(commentInfo));
   const updateMutation = useMutation((userInfo) => {
     updatePost(userInfo);
   });
 
-  useEffect(() => {
-    refetch();
-  }, []);
-
   // useEffect(() => {
-  //   console.log('생성', updateMutation.isSuccess, updateMutation.isLoading);
-  //   console.log('삭제', deleteMutation.isSuccess, deleteMutation.isLoading);
-  //   if (
-  //     (updateMutation.isSuccess && !updateMutation.isLoading) ||
-  //     (deleteMutation.isSuccess && !deleteMutation.isLoading)
-  //   ) {
-  //     console.log('패치');
-  //     // refetch();
-
-  //     // queryClient.invalidateQueries('comment');
-  //     // updateMutation.reset();
-  //     // deleteMutation.reset();
-  //   }
-  // }, [updateMutation.isSuccess, deleteMutation.isSuccess]);
+  //   refetch();
+  // }, []);
 
   if (isLoading) {
     return <h3>loading...</h3>;
@@ -84,7 +66,6 @@ export function PostDetail({ post }) {
             });
             userName.clear();
             userComment.clear();
-            // refetch();
           }}
         >
           댓글 작성
