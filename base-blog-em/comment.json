@@ -1,64 +1,10 @@
 {
   "data": [
     {
-      "postId": 1,
-      "id": 1,
-      "name": "test1",
-      "comment": "test1"
-    },
-    {
-      "postId": 1,
-      "id": 2,
-      "name": "test2",
-      "comment": "test2"
-    },
-    {
       "postId": 2,
-      "id": 1,
       "name": "test3",
-      "comment": "test3"
-    },
-    {
-      "postId": 3,
-      "id": 1,
-      "name": "test4",
-      "comment": "test4"
-    },
-    {
-      "postId": 1,
-      "id": 5,
-      "name": "test5",
-      "comment": "test5"
-    },
-    {
-      "postId": 1,
-      "id": 6,
-      "name": "test5",
-      "comment": "tes66"
-    },
-    {
-      "postId": 1,
-      "id": 7,
-      "name": "test5",
-      "comment": "666tes6666"
-    },
-    {
-      "postId": 1,
-      "id": 8,
-      "name": "test5",
-      "comment": "test66"
-    },
-    {
-      "postId": 1,
-      "id": 10,
-      "name": "으악",
-      "comment": "아아"
-    },
-    {
-      "postId": 2,
-      "id": 3,
-      "name": "ㅅㄷㄴㅅ",
-      "comment": "ㅅㅈㄷㅅ"
+      "comment": "test3",
+      "id": 3
     }
   ]
 }
